@@ -33,7 +33,7 @@ Open `http://127.0.0.1:8001/`.
 
 ## Screenshots
 
-![Dashboard overview](assets/screenshots/dashboard.svg)
+![Dashboard overview](assets/screenshots/dashboard(2).svg)
 
 ## How to build
 
