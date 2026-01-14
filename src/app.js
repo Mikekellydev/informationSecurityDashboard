@@ -460,6 +460,7 @@ function renderSites(filteredProjects) {
   entries.forEach(([site, metrics]) => {
     const div = document.createElement("div");
     div.className = "site-card";
+    div.dataset.site = site;
     const riskRatio = metrics.total ? (metrics.total - metrics.atRisk) / metrics.total : 0;
     div.innerHTML = `
       <h4>${site}</h4>
@@ -514,6 +515,28 @@ function renderTable(filteredProjects) {
   });
 
   tableMeta.textContent = `${filteredProjects.length} of ${projects.length} projects shown`;
+}
+
+function focusOnSite(site) {
+  siteFilter.value = site;
+  statusFilter.value = "";
+  priorityFilter.value = "";
+  riskFilter.value = "";
+  deadlineStart.value = "";
+  deadlineEnd.value = "";
+  searchInput.value = "";
+  renderDashboard();
+}
+
+function handleSiteCardClick(event) {
+  const card = event.target.closest(".site-card");
+  if (!card) {
+    return;
+  }
+  const { site } = card.dataset;
+  if (site) {
+    focusOnSite(site);
+  }
 }
 
 function renderDashboard() {
@@ -683,6 +706,7 @@ function initialize() {
   });
   projectForm.addEventListener("submit", handleSaveProject);
   projectTable.addEventListener("click", handleRowActions);
+  siteGrid.addEventListener("click", handleSiteCardClick);
   exportDataButton.addEventListener("click", handleExport);
   importFileInput.addEventListener("change", handleImport);
 
