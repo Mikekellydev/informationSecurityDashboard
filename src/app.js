@@ -148,6 +148,7 @@ const seedProjects = [
 ];
 
 let projects = loadProjects();
+let summaryFilter = null;
 
 const siteFilter = document.getElementById("siteFilter");
 const statusFilter = document.getElementById("statusFilter");
@@ -365,6 +366,7 @@ function applyFilters() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   const start = parseDate(deadlineStart.value);
   const end = parseDate(deadlineEnd.value);
+  const today = new Date();
 
   return projects.filter((project) => {
     if (siteFilter.value && project.site !== siteFilter.value) {
@@ -399,6 +401,23 @@ function applyFilters() {
       return false;
     }
 
+    if (summaryFilter === "on-track" && project.status !== "On Track") {
+      return false;
+    }
+
+    if (
+      summaryFilter === "at-risk" &&
+      !["At Risk", "Delayed"].includes(project.status)
+    ) {
+      return false;
+    }
+
+    if (summaryFilter === "overdue") {
+      if (!endDate || endDate >= today || project.status === "Complete") {
+        return false;
+      }
+    }
+
     return true;
   });
 }
@@ -420,9 +439,9 @@ function renderSummary(filteredProjects) {
 
   const summaryCards = [
     { label: "Total initiatives", value: total },
-    { label: "On track", value: onTrack },
-    { label: "At risk", value: atRisk },
-    { label: "Overdue", value: overdue },
+    { label: "On track", value: onTrack, filterKey: "on-track" },
+    { label: "At risk", value: atRisk, filterKey: "at-risk" },
+    { label: "Overdue", value: overdue, filterKey: "overdue" },
     { label: "Budget at risk", value: currencyFormatter.format(budgetAtRisk) },
   ];
 
@@ -430,6 +449,15 @@ function renderSummary(filteredProjects) {
   summaryCards.forEach((card) => {
     const div = document.createElement("div");
     div.className = "summary-card";
+    if (card.filterKey) {
+      div.classList.add("is-clickable");
+      div.dataset.filter = card.filterKey;
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+      if (summaryFilter === card.filterKey) {
+        div.classList.add("is-active");
+      }
+    }
     div.innerHTML = `<p>${card.label}</p><h3>${card.value}</h3>`;
     summaryGrid.append(div);
   });
@@ -554,7 +582,36 @@ function resetAllFilters() {
   deadlineStart.value = "";
   deadlineEnd.value = "";
   searchInput.value = "";
+  summaryFilter = null;
   renderDashboard();
+}
+
+function handleSummaryFilter(filterKey) {
+  if (!filterKey) {
+    return;
+  }
+  summaryFilter = summaryFilter === filterKey ? null : filterKey;
+  renderDashboard();
+}
+
+function handleSummaryClick(event) {
+  const card = event.target.closest(".summary-card.is-clickable");
+  if (!card) {
+    return;
+  }
+  handleSummaryFilter(card.dataset.filter);
+}
+
+function handleSummaryKeydown(event) {
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+  const card = event.target.closest(".summary-card.is-clickable");
+  if (!card) {
+    return;
+  }
+  event.preventDefault();
+  handleSummaryFilter(card.dataset.filter);
 }
 
 function openModal(project) {
@@ -707,6 +764,8 @@ function initialize() {
   projectForm.addEventListener("submit", handleSaveProject);
   projectTable.addEventListener("click", handleRowActions);
   siteGrid.addEventListener("click", handleSiteCardClick);
+  summaryGrid.addEventListener("click", handleSummaryClick);
+  summaryGrid.addEventListener("keydown", handleSummaryKeydown);
   exportDataButton.addEventListener("click", handleExport);
   importFileInput.addEventListener("change", handleImport);
 
