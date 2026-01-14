@@ -520,6 +520,10 @@ tbody tr {
 .footer {
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding: 24px 52px 40px;
   color: rgba(229, 236, 245, 0.6);
   font-size: 0.85rem;
@@ -527,6 +531,45 @@ tbody tr {
 
 .footer-aux {
   margin-top: 6px;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(229, 236, 245, 0.75);
+  text-decoration: none;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.github-link svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.github-link:hover,
+.github-link:focus {
+  background: rgba(74, 166, 255, 0.08);
+  color: rgba(74, 166, 255, 0.95);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 166, 255, 0.06);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (max-width: 1080px) {
@@ -559,6 +602,8 @@ tbody tr {
   }
 
   .footer {
+    flex-direction: column;
+    align-items: flex-start;
     padding: 20px 24px 32px;
   }
 }
