@@ -213,6 +213,18 @@ function parseDate(value) {
   return value ? new Date(`${value}T00:00:00`) : null;
 }
 
+function startOfDay(date) {
+  const next = new Date(date);
+  next.setHours(0, 0, 0, 0);
+  return next;
+}
+
+function addDays(date, days) {
+  const next = new Date(date);
+  next.setDate(next.getDate() + days);
+  return next;
+}
+
 function formatDate(value) {
   if (!value) {
     return "--";
@@ -366,7 +378,8 @@ function applyFilters() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   const start = parseDate(deadlineStart.value);
   const end = parseDate(deadlineEnd.value);
-  const today = new Date();
+  const today = startOfDay(new Date());
+  const dueSoon = addDays(today, 14);
 
   return projects.filter((project) => {
     if (siteFilter.value && project.site !== siteFilter.value) {
@@ -418,6 +431,17 @@ function applyFilters() {
       }
     }
 
+    if (summaryFilter === "due-soon") {
+      if (
+        !endDate ||
+        endDate < today ||
+        endDate > dueSoon ||
+        project.status === "Complete"
+      ) {
+        return false;
+      }
+    }
+
     return true;
   });
 }
@@ -428,10 +452,20 @@ function renderSummary(filteredProjects) {
   const atRisk = filteredProjects.filter((project) =>
     ["At Risk", "Delayed"].includes(project.status)
   ).length;
-  const today = new Date();
+  const today = startOfDay(new Date());
+  const dueSoon = addDays(today, 14);
   const overdue = filteredProjects.filter((project) => {
     const endDate = parseDate(project.endDate);
     return endDate < today && project.status !== "Complete";
+  }).length;
+  const dueSoonCount = filteredProjects.filter((project) => {
+    const endDate = parseDate(project.endDate);
+    return (
+      endDate &&
+      endDate >= today &&
+      endDate <= dueSoon &&
+      project.status !== "Complete"
+    );
   }).length;
   const budgetAtRisk = filteredProjects
     .filter((project) => ["High", "Critical"].includes(project.risk))
@@ -442,6 +476,7 @@ function renderSummary(filteredProjects) {
     { label: "On track", value: onTrack, filterKey: "on-track" },
     { label: "At risk", value: atRisk, filterKey: "at-risk" },
     { label: "Overdue", value: overdue, filterKey: "overdue" },
+    { label: "Due next 2 weeks", value: dueSoonCount, filterKey: "due-soon" },
     { label: "Budget at risk", value: currencyFormatter.format(budgetAtRisk) },
   ];
 
