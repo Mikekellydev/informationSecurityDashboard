@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDI HQ Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <header class="top-bar">
+      <div class="brand">
+        <img src="../assets/sdi-logo.jpg" alt="SDI" />
+        <div>
+          <p class="brand-eyebrow">Information Security</p>
+          <h1>HQ Multi-Site Project Command</h1>
+        </div>
+      </div>
+      <div class="top-bar-meta">
+        <div>
+          <p class="meta-label">Last sync</p>
+          <p id="lastSync" class="meta-value">--</p>
+        </div>
+        <button id="resetFilters" class="ghost-button">Reset filters</button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <div class="dashboard-top">
+        <aside class="panel filters">
+          <h2>Filters</h2>
+          <div class="field">
+            <label for="siteFilter">Site</label>
+            <select id="siteFilter"></select>
+          </div>
+          <div class="field">
+            <label for="statusFilter">Status</label>
+            <select id="statusFilter"></select>
+          </div>
+          <div class="field">
+            <label for="priorityFilter">Priority</label>
+            <select id="priorityFilter"></select>
+          </div>
+          <div class="field">
+            <label for="riskFilter">Risk</label>
+            <select id="riskFilter"></select>
+          </div>
+          <div class="field">
+            <label>Deadline range</label>
+            <div class="date-range">
+              <input id="deadlineStart" type="date" />
+              <span>to</span>
+              <input id="deadlineEnd" type="date" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="searchInput">Project search</label>
+            <input id="searchInput" type="search" placeholder="Search by project or owner" />
+          </div>
+        </aside>
+
+        <section class="panel content">
+          <div class="summary-grid" id="summaryGrid"></div>
+
+          <div class="section-header">
+            <div>
+              <h2>Site readiness</h2>
+              <p>HQ visibility across all operating sites.</p>
+            </div>
+          </div>
+          <div class="site-grid" id="siteGrid"></div>
+        </section>
+      </div>
+
+      <section class="panel projects">
+        <div class="section-header">
+          <div>
+            <h2>Project register</h2>
+            <p>Track timelines, funding, and risk exposure in one view.</p>
+          </div>
+          <div class="section-actions">
+            <button id="addProject" class="primary-button">Add project</button>
+            <button id="exportData" class="ghost-button">Export JSON</button>
+            <label class="ghost-button file-button" for="importFile">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json" />
+            </label>
+            <div class="table-meta" id="tableMeta"></div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Site</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Risk</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Budget</th>
+                <th>Last update</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projectTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Prepared for HQ oversight. Use filters to surface site-specific risks and deadlines.</p>
+      <p class="footer-aux">Data shown is sample data. Swap in live feeds when ready.</p>
+    </footer>
+
+    <div id="projectModal" class="modal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="modal-eyebrow">Project entry</p>
+            <h3 id="modalTitle">Add project</h3>
+          </div>
+          <button id="closeModal" type="button" class="ghost-button small-button">Close</button>
+        </div>
+        <form id="projectForm">
+          <input type="hidden" id="projectId" name="projectId" />
+          <div class="form-grid">
+            <div class="field">
+              <label for="projectName">Project name</label>
+              <input id="projectName" name="projectName" type="text" required />
+            </div>
+            <div class="field">
+              <label for="projectSite">Site</label>
+              <input id="projectSite" name="projectSite" type="text" required />
+            </div>
+            <div class="field">
+              <label for="projectOwner">Owner</label>
+              <input id="projectOwner" name="projectOwner" type="text" required />
+            </div>
+            <div class="field">
+              <label for="projectStatus">Status</label>
+              <select id="projectStatus" name="projectStatus" required>
+                <option value="On Track">On Track</option>
+                <option value="At Risk">At Risk</option>
+                <option value="Delayed">Delayed</option>
+                <option value="Complete">Complete</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="projectPriority">Priority</label>
+              <select id="projectPriority" name="projectPriority" required>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="projectRisk">Risk</label>
+              <select id="projectRisk" name="projectRisk" required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="projectStart">Start date</label>
+              <input id="projectStart" name="projectStart" type="date" required />
+            </div>
+            <div class="field">
+              <label for="projectEnd">End date</label>
+              <input id="projectEnd" name="projectEnd" type="date" required />
+            </div>
+            <div class="field">
+              <label for="projectBudget">Budget</label>
+              <input id="projectBudget" name="projectBudget" type="number" min="0" step="1000" required />
+            </div>
+            <div class="field">
+              <label for="projectUpdate">Last update</label>
+              <input id="projectUpdate" name="projectUpdate" type="date" required />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="cancelModal" type="button" class="ghost-button">Cancel</button>
+            <button type="submit" class="primary-button">Save project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

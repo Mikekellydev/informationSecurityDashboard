@@ -1,0 +1,289 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 3 0 R 4 0 R 5 0 R ] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 6 0 R >> >> /Contents 8 0 R >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 6 0 R >> >> /Contents 9 0 R >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+7 0 obj
+<< /Length 2930 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+12 TL
+(SDI Director of Information Security - Interview Study Guide \(Role-Tailored Q&A, One Page\)) Tj
+T*
+T*
+(Role Context At SDI) Tj
+T*
+T*
+(-   Q: Where does the Director of Information Security sit in SDI's org) Tj
+T*
+(    and governance? A: The Director of Information Security leads the) Tj
+T*
+(    InfoSec team and program; the CFO oversees cybersecurity safeguards) Tj
+T*
+(    and risk management, and the Board/Audit Committee receive regular) Tj
+T*
+(    cyber updates.[1]) Tj
+T*
+T*
+(-   Q: What is the security program aligned to? A: SDI states its) Tj
+T*
+(    program aligns to NIST and is integrated into enterprise risk) Tj
+T*
+(    management.[1]) Tj
+T*
+T*
+(What Success Looks Like \(First 6-12 Months\)) Tj
+T*
+T*
+(-   Q: What are your top three outcomes in year one? A: 1\) Reduce OT) Tj
+T*
+(    downtime risk with segmentation, secure remote access, and recovery) Tj
+T*
+(    playbooks. 2\) Establish board-ready risk metrics tied to uptime and) Tj
+T*
+(    financial impact. 3\) Harden third-party and identity controls across) Tj
+T*
+(    critical operations.) Tj
+T*
+T*
+(-   Q: How do you balance security with production? A: Use risk-based) Tj
+T*
+(    prioritization, align changes to maintenance windows, and favor) Tj
+T*
+(    controls that improve visibility and containment without disrupting) Tj
+T*
+(    operations.) Tj
+T*
+T*
+(OT/IT Security Focus) Tj
+T*
+T*
+(-   Q: How would you start an OT security program at SDI? A: Build an OT) Tj
+T*
+(    asset and criticality map, segment high-risk zones, and implement) Tj
+T*
+(    secure remote access for vendors while protecting line uptime.) Tj
+T*
+T*
+(-   Q: What OT risks are most material in a steel manufacturer? A:) Tj
+T*
+(    Unplanned downtime, safety impacts, and loss of production control) Tj
+T*
+(    from ransomware or lateral movement into OT networks.[1]) Tj
+T*
+T*
+(-   Q: How do you handle patching in OT environments? A: Apply) Tj
+T*
+(    compensating controls \(segmentation, allowlisting, monitoring\) and) Tj
+T*
+(    align patching to planned outages with plant leadership approval.) Tj
+T*
+T*
+(Incident Response \(Plant Disruption Scenario\)) Tj
+T*
+T*
+(-   Q: Malware impacts a flat roll line network segment. What do you do) Tj
+T*
+(    first? A: Contain the segment, preserve safety and control) Tj
+T*
+(    integrity, communicate with plant leaders, and initiate IR while) Tj
+T*
+(    keeping production stable if safe.) Tj
+T*
+T*
+(-   Q: How do you decide materiality and escalation? A: Assess potential) Tj
+T*
+(    production loss, safety impact, and financial exposure; escalate to) Tj
+T*
+(    CFO and Audit Committee if thresholds are met.) Tj
+T*
+T*
+(Governance And Metrics) Tj
+T*
+T*
+(-   Q: What KPIs would you report quarterly to the Audit Committee? A:) Tj
+T*
+(    OT asset visibility %, segmentation coverage, MFA/privileged access) Tj
+T*
+(    coverage, critical vendor risk ratings, and IR readiness \(tabletop) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 2476 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+12 TL
+(    frequency, RTO/MTTR\).) Tj
+T*
+T*
+(-   Q: How would you present cyber risk in business terms? A: Translate) Tj
+T*
+(    into downtime hours avoided, safety risk reduction, and revenue) Tj
+T*
+(    protection.) Tj
+T*
+T*
+(Third-Party Risk) Tj
+T*
+T*
+(-   Q: How would you manage OT vendor access? A: Tier vendors by) Tj
+T*
+(    production impact, require MFA and just-in-time access, log and) Tj
+T*
+(    monitor sessions, and enforce incident notification SLAs.) Tj
+T*
+T*
+(-   Q: How do you avoid slowing the business with vendor controls? A:) Tj
+T*
+(    Focus on Tier 1 suppliers first, implement lightweight controls for) Tj
+T*
+(    low-risk vendors, and automate access reviews.) Tj
+T*
+T*
+(Financial And Business Literacy) Tj
+T*
+T*
+(-   Q: What were SDI's FY2024 results? A: Net sales $17.54B, operating) Tj
+T*
+(    income $1.94B, net income $1.54B.[1]) Tj
+T*
+T*
+(-   Q: What is the biggest revenue driver? A: Steel operations, which) Tj
+T*
+(    represented 69% of 2024 net sales.[1]) Tj
+T*
+T*
+(-   Q: What operational scale do you need to protect? A: Large EAF-based) Tj
+T*
+(    steel operations, metals recycling, and steel fabrication plants) Tj
+T*
+(    with national footprint.[1]) Tj
+T*
+T*
+(Culture And People) Tj
+T*
+T*
+(-   Q: How would you fit SDI's team-based culture? A: Build shared) Tj
+T*
+(    accountability with operations, align security KPIs to team) Tj
+T*
+(    performance, and emphasize training and practical workflows.) Tj
+T*
+T*
+(-   Q: What would you do to improve security awareness? A: Continue) Tj
+T*
+(    monthly training, add OT-specific drills, and track participation) Tj
+T*
+(    and phishing results by site.[1]) Tj
+T*
+T*
+(Leadership And Change Management) Tj
+T*
+T*
+(-   Q: How do you lead security across multiple plants? A: Use a) Tj
+T*
+(    hub-and-spoke model with site champions, standardize core controls,) Tj
+T*
+(    and tailor execution to each plant's constraints.) Tj
+T*
+T*
+(-   Q: How do you handle resistance to security changes? A: Tie changes) Tj
+T*
+(    to safety and uptime, pilot in one site, and scale based on measured) Tj
+T*
+(    results.) Tj
+T*
+T*
+(Compensation Benchmark \(For Discussion\)) Tj
+T*
+T*
+(-   Q: What is a public benchmark for a Director of Information) Tj
+T*
+(    Security? A: Salary.com lists a US median base of about $208,843,) Tj
+T*
+(    with a typical range of about $176,295 to $230,116 \(national) Tj
+T*
+(    benchmark\).[2]) Tj
+T*
+T*
+(Questions You Can Ask Them) Tj
+T*
+T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 721 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+12 TL
+(-   Q: Which plants or lines have the highest unplanned downtime risk) Tj
+T*
+(    today?) Tj
+T*
+(-   Q: What is the current cadence and format for cyber reporting to the) Tj
+T*
+(    Audit Committee?) Tj
+T*
+(-   Q: How do you balance plant uptime with security change windows?) Tj
+T*
+(-   Q: Which vendors are most critical to OT operations and remote) Tj
+T*
+(    support?) Tj
+T*
+T*
+(Sources) Tj
+T*
+T*
+(1.  SDI FY2024 Form 10-K \(SEC\):) Tj
+T*
+(    https://www.sec.gov/Archives/edgar/data/1022671/000155837025001886/stld-) Tj
+T*
+(    20241231x10k.htm) Tj
+T*
+(2.  Salary.com benchmark:) Tj
+T*
+(    https://www.salary.com/research/salary/benchmark/information-security-director-salary) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000129 00000 n 
+0000000255 00000 n 
+0000000381 00000 n 
+0000000507 00000 n 
+0000000577 00000 n 
+0000003559 00000 n 
+0000006087 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+6859
+%%EOF
