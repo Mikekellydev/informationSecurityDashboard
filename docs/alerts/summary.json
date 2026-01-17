@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-01-17T03:59:20.641850+00:00",
+  "counts": {
+    "ddos": 0,
+    "brute_force": 0,
+    "port_scan": 0,
+    "malware": 0,
+    "out_of_date": 0,
+    "other": 0
+  }
+}
