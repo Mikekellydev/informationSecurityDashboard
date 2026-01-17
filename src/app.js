@@ -2,147 +2,147 @@ const STORAGE_KEY = "sdiDashboardProjects";
 
 const seedProjects = [
   {
-    name: "Zero Trust Segmentation",
-    site: "Burns Harbor",
-    owner: "A. Patel",
+    name: "Managed Firewall",
+    site: "Northwind Logistics",
+    owner: "J. Rios",
     status: "On Track",
     priority: "P1",
     risk: "Medium",
     startDate: "2024-10-01",
     endDate: "2025-03-15",
-    budget: 1850000,
+    budget: 42000,
     lastUpdate: "2025-01-05",
   },
   {
-    name: "SOC Modernization",
-    site: "Sinton",
-    owner: "M. Rivera",
+    name: "Endpoint Protection",
+    site: "Rivermark Health",
+    owner: "L. Chang",
     status: "At Risk",
     priority: "P1",
     risk: "High",
     startDate: "2024-09-20",
     endDate: "2025-02-28",
-    budget: 2400000,
+    budget: 58000,
     lastUpdate: "2025-01-11",
   },
   {
-    name: "Identity Lifecycle Refresh",
-    site: "Columbus",
-    owner: "L. Chang",
+    name: "M365 Management",
+    site: "Cedar Valley Retail",
+    owner: "M. Rivera",
     status: "On Track",
     priority: "P2",
     risk: "Low",
     startDate: "2024-11-15",
     endDate: "2025-05-10",
-    budget: 820000,
+    budget: 26000,
     lastUpdate: "2025-01-08",
   },
   {
-    name: "OT Asset Discovery",
-    site: "Roanoke",
+    name: "Backup and DR",
+    site: "Atlas Manufacturing",
     owner: "E. Wilson",
     status: "Delayed",
     priority: "P1",
     risk: "Critical",
     startDate: "2024-08-10",
     endDate: "2024-12-20",
-    budget: 1260000,
+    budget: 74000,
     lastUpdate: "2025-01-02",
   },
   {
-    name: "Cloud Access Posture",
-    site: "Burns Harbor",
+    name: "Security Monitoring",
+    site: "Blue Harbor Capital",
     owner: "R. Ahmed",
     status: "On Track",
     priority: "P2",
     risk: "Medium",
     startDate: "2024-12-01",
     endDate: "2025-06-30",
-    budget: 640000,
+    budget: 68000,
     lastUpdate: "2025-01-12",
   },
   {
-    name: "Email Threat Defense",
-    site: "Sinton",
+    name: "Email Security",
+    site: "Juniper Hospitality",
     owner: "S. Greene",
     status: "Complete",
     priority: "P3",
     risk: "Low",
     startDate: "2024-05-01",
     endDate: "2024-11-30",
-    budget: 310000,
+    budget: 15000,
     lastUpdate: "2024-12-02",
   },
   {
-    name: "HQ Governance Playbook",
-    site: "Headquarters",
+    name: "Patch Management",
+    site: "Summit Utilities",
     owner: "T. Brooks",
     status: "On Track",
     priority: "P2",
     risk: "Low",
     startDate: "2024-11-05",
     endDate: "2025-02-20",
-    budget: 220000,
+    budget: 32000,
     lastUpdate: "2025-01-09",
   },
   {
-    name: "Network Segmentation Phase 2",
-    site: "Columbus",
+    name: "Vulnerability Scanning",
+    site: "Garnet Public Schools",
     owner: "D. Lewis",
     status: "At Risk",
     priority: "P1",
     risk: "High",
     startDate: "2024-07-15",
     endDate: "2025-01-25",
-    budget: 1980000,
+    budget: 28000,
     lastUpdate: "2025-01-10",
   },
   {
-    name: "Physical Access Hardening",
-    site: "Roanoke",
+    name: "Network Operations",
+    site: "Lakeside Construction",
     owner: "G. Torres",
     status: "On Track",
     priority: "P3",
     risk: "Medium",
     startDate: "2024-10-20",
     endDate: "2025-04-05",
-    budget: 410000,
+    budget: 24000,
     lastUpdate: "2025-01-04",
   },
   {
-    name: "Vendor Risk Remediation",
-    site: "Headquarters",
+    name: "Compliance Reporting",
+    site: "Fairway Legal",
     owner: "K. Singh",
     status: "On Track",
     priority: "P2",
     risk: "Medium",
     startDate: "2024-09-12",
     endDate: "2025-03-08",
-    budget: 560000,
+    budget: 19000,
     lastUpdate: "2025-01-06",
   },
   {
-    name: "Data Loss Prevention",
-    site: "Sinton",
+    name: "Identity and Access",
+    site: "Orion Data Centers",
     owner: "J. Howard",
     status: "Delayed",
     priority: "P1",
     risk: "High",
     startDate: "2024-06-10",
     endDate: "2024-12-10",
-    budget: 1440000,
+    budget: 51000,
     lastUpdate: "2025-01-03",
   },
   {
-    name: "BCP Tabletop Exercise",
-    site: "Columbus",
+    name: "EDR Tuning",
+    site: "Pinehurst Foods",
     owner: "N. Carter",
     status: "Complete",
     priority: "P3",
     risk: "Low",
     startDate: "2024-08-01",
     endDate: "2024-10-15",
-    budget: 95000,
+    budget: 12000,
     lastUpdate: "2024-10-20",
   },
 ];
@@ -182,6 +182,9 @@ const projectStartInput = document.getElementById("projectStart");
 const projectEndInput = document.getElementById("projectEnd");
 const projectBudgetInput = document.getElementById("projectBudget");
 const projectUpdateInput = document.getElementById("projectUpdate");
+const alertsGrid = document.getElementById("alertsGrid");
+const alertsList = document.getElementById("alertsList");
+const alertsUpdated = document.getElementById("alertsUpdated");
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -193,6 +196,14 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
   year: "numeric",
+});
+
+const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
 });
 
 const statusClassMap = {
@@ -279,7 +290,7 @@ function loadProjects() {
       return normalizeProjects(parsed);
     }
   } catch (error) {
-    console.warn("Failed to parse stored projects.", error);
+    console.warn("Failed to parse stored services.", error);
   }
 
   return normalizeProjects(seedProjects);
@@ -472,12 +483,12 @@ function renderSummary(filteredProjects) {
     .reduce((sum, project) => sum + project.budget, 0);
 
   const summaryCards = [
-    { label: "Total initiatives", value: total },
+    { label: "Total services", value: total },
     { label: "On track", value: onTrack, filterKey: "on-track" },
     { label: "At risk", value: atRisk, filterKey: "at-risk" },
-    { label: "Overdue", value: overdue, filterKey: "overdue" },
-    { label: "Due next 2 weeks", value: dueSoonCount, filterKey: "due-soon" },
-    { label: "Budget at risk", value: currencyFormatter.format(budgetAtRisk) },
+    { label: "Renewals overdue", value: overdue, filterKey: "overdue" },
+    { label: "Renewals next 2 weeks", value: dueSoonCount, filterKey: "due-soon" },
+    { label: "Revenue at risk", value: currencyFormatter.format(budgetAtRisk) },
   ];
 
   summaryGrid.innerHTML = "";
@@ -515,7 +526,7 @@ function renderSites(filteredProjects) {
   if (!entries.length) {
     const empty = document.createElement("div");
     empty.className = "site-empty";
-    empty.textContent = "No sites match the current filters.";
+    empty.textContent = "No clients match the current filters.";
     siteGrid.append(empty);
     return;
   }
@@ -528,7 +539,7 @@ function renderSites(filteredProjects) {
     div.innerHTML = `
       <h4>${site}</h4>
       <div class="site-metrics">
-        <span>${metrics.total} active</span>
+        <span>${metrics.total} active services</span>
         <span>${metrics.atRisk} at risk</span>
       </div>
       <div class="site-bar">
@@ -544,9 +555,9 @@ function renderTable(filteredProjects) {
 
   if (!filteredProjects.length) {
     const row = document.createElement("tr");
-    row.innerHTML = `<td colspan="11">No projects match the current filters.</td>`;
+    row.innerHTML = `<td colspan="11">No services match the current filters.</td>`;
     projectTable.append(row);
-    tableMeta.textContent = "0 projects shown";
+    tableMeta.textContent = "0 services shown";
     return;
   }
 
@@ -577,7 +588,7 @@ function renderTable(filteredProjects) {
     projectTable.append(row);
   });
 
-  tableMeta.textContent = `${filteredProjects.length} of ${projects.length} projects shown`;
+  tableMeta.textContent = `${filteredProjects.length} of ${projects.length} services shown`;
 }
 
 function focusOnSite(site) {
@@ -652,7 +663,7 @@ function handleSummaryKeydown(event) {
 function openModal(project) {
   projectForm.reset();
   const isEdit = Boolean(project);
-  modalTitle.textContent = isEdit ? "Edit project" : "Add project";
+  modalTitle.textContent = isEdit ? "Edit service" : "Add service";
   projectIdInput.value = project?.id || "";
   projectNameInput.value = project?.name || "";
   projectSiteInput.value = project?.site || "";
@@ -725,7 +736,7 @@ function handleRowActions(event) {
       return;
     }
 
-    const confirmed = window.confirm(`Delete project "${target.name}"?`);
+    const confirmed = window.confirm(`Delete service "${target.name}"?`);
     if (!confirmed) {
       return;
     }
@@ -740,7 +751,7 @@ function handleExport() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "sdi-projects.json";
+  link.download = "msp-services.json";
   document.body.append(link);
   link.click();
   link.remove();
@@ -758,7 +769,7 @@ function handleImport(event) {
     try {
       const parsed = JSON.parse(reader.result);
       if (!Array.isArray(parsed)) {
-        window.alert("Import failed: expected a JSON array of projects.");
+        window.alert("Import failed: expected a JSON array of services.");
         return;
       }
       setProjects(parsed);
@@ -769,6 +780,212 @@ function handleImport(event) {
     }
   };
   reader.readAsText(file);
+}
+
+const ALERT_TYPE_LABELS = {
+  ddos: "DDoS",
+  brute_force: "Brute force",
+  port_scan: "Port scan",
+  malware: "Malware",
+  out_of_date: "Out of date",
+  availability: "Availability",
+  other: "Other",
+};
+
+const ALERT_SEVERITY_CLASSES = {
+  low: "alert-sev-low",
+  medium: "alert-sev-medium",
+  high: "alert-sev-high",
+  critical: "alert-sev-critical",
+};
+
+function formatAlertType(type) {
+  if (!type) {
+    return "Alert";
+  }
+  return ALERT_TYPE_LABELS[type] || type.replace(/_/g, " ");
+}
+
+function formatAlertTime(timestamp) {
+  if (!timestamp) {
+    return "Unknown time";
+  }
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) {
+    return "Unknown time";
+  }
+  return dateTimeFormatter.format(date);
+}
+
+function trimTrailingSlash(value) {
+  return value.replace(/\/+$/, "");
+}
+
+function buildAlertsConfig() {
+  const dataset = document.body?.dataset || {};
+  const baseUrl = (dataset.alertsBaseUrl || "").trim();
+  const alertsUrl = (dataset.alertsUrl || "").trim();
+  const summaryUrl = (dataset.alertsSummaryUrl || "").trim();
+  const refreshMs = Number(dataset.alertsRefreshMs) || 900000;
+
+  return {
+    alertsUrl: alertsUrl || (baseUrl ? `${trimTrailingSlash(baseUrl)}/alerts.json` : ""),
+    summaryUrl: summaryUrl || (baseUrl ? `${trimTrailingSlash(baseUrl)}/summary.json` : ""),
+    refreshMs,
+  };
+}
+
+function setAlertsStatus(text) {
+  if (alertsUpdated) {
+    alertsUpdated.textContent = text;
+  }
+}
+
+function renderAlertsSummary(summary) {
+  if (!alertsGrid) {
+    return;
+  }
+  const counts = summary?.counts || {};
+  const cards = [
+    { key: "ddos", label: ALERT_TYPE_LABELS.ddos },
+    { key: "brute_force", label: ALERT_TYPE_LABELS.brute_force },
+    { key: "port_scan", label: ALERT_TYPE_LABELS.port_scan },
+    { key: "malware", label: ALERT_TYPE_LABELS.malware },
+    { key: "out_of_date", label: ALERT_TYPE_LABELS.out_of_date },
+  ];
+
+  alertsGrid.innerHTML = "";
+  cards.forEach((card) => {
+    const div = document.createElement("div");
+    div.className = "alert-card";
+    const value = Number(counts[card.key]) || 0;
+    div.innerHTML = `<p>${card.label}</p><h3>${value}</h3>`;
+    alertsGrid.append(div);
+  });
+}
+
+function renderAlertsList(alerts, emptyMessage = "No security alerts found.") {
+  if (!alertsList) {
+    return;
+  }
+  alertsList.innerHTML = "";
+
+  if (!alerts?.length) {
+    const empty = document.createElement("div");
+    empty.className = "alerts-empty";
+    empty.textContent = emptyMessage;
+    alertsList.append(empty);
+    return;
+  }
+
+  alerts.slice(0, 8).forEach((alert) => {
+    const item = document.createElement("div");
+    item.className = "alert-item";
+    const severity = (alert.severity || "low").toLowerCase();
+    const severityClass = ALERT_SEVERITY_CLASSES[severity] || ALERT_SEVERITY_CLASSES.low;
+    const title = alert.title || "Security alert";
+    const summary = alert.summary || "";
+    const entity = alert.entity || "Unknown";
+    const source = alert.source || "SIEM";
+    const typeLabel = formatAlertType(alert.type);
+    const timeLabel = formatAlertTime(alert.timestamp);
+
+    const main = document.createElement("div");
+    main.className = "alert-main";
+
+    const titleEl = document.createElement("p");
+    titleEl.className = "alert-title";
+    titleEl.textContent = title;
+    main.append(titleEl);
+
+    const meta = document.createElement("div");
+    meta.className = "alert-meta";
+
+    const entityEl = document.createElement("span");
+    entityEl.textContent = entity;
+    meta.append(entityEl);
+
+    const timeEl = document.createElement("span");
+    timeEl.textContent = timeLabel;
+    meta.append(timeEl);
+
+    if (summary) {
+      const summaryEl = document.createElement("span");
+      summaryEl.textContent = summary;
+      meta.append(summaryEl);
+    }
+
+    main.append(meta);
+
+    const tags = document.createElement("div");
+    tags.className = "alert-tags";
+
+    const severityEl = document.createElement("span");
+    severityEl.className = `alert-pill ${severityClass}`;
+    severityEl.textContent = severity;
+    tags.append(severityEl);
+
+    const typeEl = document.createElement("span");
+    typeEl.className = "alert-pill";
+    typeEl.textContent = typeLabel;
+    tags.append(typeEl);
+
+    const sourceEl = document.createElement("span");
+    sourceEl.className = "alert-pill";
+    sourceEl.textContent = source;
+    tags.append(sourceEl);
+
+    item.append(main, tags);
+    alertsList.append(item);
+  });
+}
+
+async function fetchJson(url) {
+  const cacheBuster = url.includes("?") ? "&" : "?";
+  const response = await fetch(`${url}${cacheBuster}t=${Date.now()}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status}`);
+  }
+  return response.json();
+}
+
+async function loadSecurityAlerts() {
+  const config = buildAlertsConfig();
+  if (!config.alertsUrl && !config.summaryUrl) {
+    setAlertsStatus("Not connected");
+    renderAlertsSummary({ counts: {} });
+    renderAlertsList([], "Connect an alerts feed to show security detections.");
+    return;
+  }
+
+  try {
+    const [summary, alerts] = await Promise.all([
+      config.summaryUrl ? fetchJson(config.summaryUrl) : Promise.resolve(null),
+      config.alertsUrl ? fetchJson(config.alertsUrl) : Promise.resolve([]),
+    ]);
+
+    renderAlertsSummary(summary);
+    renderAlertsList(alerts);
+
+    const updatedAt = summary?.generatedAt || new Date().toISOString();
+    setAlertsStatus(`Updated ${formatAlertTime(updatedAt)}`);
+  } catch (error) {
+    setAlertsStatus("Alerts unavailable");
+    renderAlertsList([], "Security alerts unavailable.");
+  }
+}
+
+function initSecurityAlerts() {
+  if (!alertsGrid || !alertsList || !alertsUpdated) {
+    return;
+  }
+  loadSecurityAlerts();
+  const { refreshMs } = buildAlertsConfig();
+  if (refreshMs > 0) {
+    setInterval(loadSecurityAlerts, refreshMs);
+  }
 }
 
 function initialize() {
@@ -805,6 +1022,7 @@ function initialize() {
   importFileInput.addEventListener("change", handleImport);
 
   renderDashboard();
+  initSecurityAlerts();
 }
 
 initialize();

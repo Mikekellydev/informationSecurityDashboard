@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SDI HQ Project Dashboard</title>
+    <title>SparkwaveIT MSP Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,14 +12,17 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body
+    data-alerts-base-url="https://mikekellydev.github.io/informationSecurityDashboard/alerts"
+    data-alerts-refresh-ms="900000"
+  >
     <div class="background-glow"></div>
     <header class="top-bar">
       <div class="brand">
-        <img src="../assets/sdi-logo.jpg" alt="SDI" />
+        <img src="../assets/sdi-logo.jpg" alt="Sparkwave IT Service" />
         <div>
-          <p class="brand-eyebrow">Information Security</p>
-          <h1>HQ Multi-Site Project Command</h1>
+          <p class="brand-eyebrow">Managed Services</p>
+          <h1>Managed Services Portfolio Tracker</h1>
         </div>
       </div>
       <div class="top-bar-meta">
@@ -36,7 +39,7 @@
         <aside class="panel filters">
           <h2>Filters</h2>
           <div class="field">
-            <label for="siteFilter">Site</label>
+            <label for="siteFilter">Client</label>
             <select id="siteFilter"></select>
           </div>
           <div class="field">
@@ -60,8 +63,8 @@
             </div>
           </div>
           <div class="field">
-            <label for="searchInput">Project search</label>
-            <input id="searchInput" type="search" placeholder="Search by project or owner" />
+            <label for="searchInput">Service search</label>
+            <input id="searchInput" type="search" placeholder="Search by client or owner" />
           </div>
         </aside>
 
@@ -70,22 +73,34 @@
 
           <div class="section-header">
             <div>
-              <h2>Site readiness</h2>
-              <p>HQ visibility across all operating sites.</p>
+              <h2>Client health</h2>
+              <p>Account visibility across all managed services.</p>
             </div>
           </div>
           <div class="site-grid" id="siteGrid"></div>
+
+          <div class="section-header">
+            <div>
+              <h2>Security alerts</h2>
+              <p>Live detections from hosting.com and your SIEM.</p>
+            </div>
+            <div class="section-actions">
+              <span class="meta-chip" id="alertsUpdated">Not connected</span>
+            </div>
+          </div>
+          <div class="alerts-grid" id="alertsGrid"></div>
+          <div class="alerts-list" id="alertsList"></div>
         </section>
       </div>
 
       <section class="panel projects">
         <div class="section-header">
           <div>
-            <h2>Project register</h2>
-            <p>Track timelines, funding, and risk exposure in one view.</p>
+            <h2>Service register</h2>
+            <p>Track SLAs, renewals, and risk exposure in one view.</p>
           </div>
           <div class="section-actions">
-            <button id="addProject" class="primary-button">Add project</button>
+            <button id="addProject" class="primary-button">Add service</button>
             <button id="exportData" class="ghost-button">Export JSON</button>
             <label class="ghost-button file-button" for="importFile">
               Import JSON
@@ -98,15 +113,15 @@
           <table>
             <thead>
               <tr>
-                <th>Project</th>
-                <th>Site</th>
-                <th>Owner</th>
+                <th>Service</th>
+                <th>Client</th>
+                <th>Service owner</th>
                 <th>Status</th>
                 <th>Priority</th>
                 <th>Risk</th>
                 <th>Start</th>
-                <th>End</th>
-                <th>Budget</th>
+                <th>Renewal</th>
+                <th>Monthly revenue</th>
                 <th>Last update</th>
                 <th>Actions</th>
               </tr>
@@ -119,7 +134,7 @@
 
     <footer class="footer">
       <div>
-        <p>Prepared for HQ oversight. Use filters to surface site-specific risks and deadlines.</p>
+        <p>Prepared for managed services oversight. Use filters to surface client risks and renewals.</p>
         <p class="footer-aux">Data shown is sample data. Swap in live feeds when ready.</p>
       </div>
       <a
@@ -140,8 +155,8 @@
       <div class="modal-card">
         <div class="modal-header">
           <div>
-            <p class="modal-eyebrow">Project entry</p>
-            <h3 id="modalTitle">Add project</h3>
+            <p class="modal-eyebrow">Service entry</p>
+            <h3 id="modalTitle">Add service</h3>
           </div>
           <button id="closeModal" type="button" class="ghost-button small-button">Close</button>
         </div>
@@ -149,15 +164,15 @@
           <input type="hidden" id="projectId" name="projectId" />
           <div class="form-grid">
             <div class="field">
-              <label for="projectName">Project name</label>
+              <label for="projectName">Service name</label>
               <input id="projectName" name="projectName" type="text" required />
             </div>
             <div class="field">
-              <label for="projectSite">Site</label>
+              <label for="projectSite">Client</label>
               <input id="projectSite" name="projectSite" type="text" required />
             </div>
             <div class="field">
-              <label for="projectOwner">Owner</label>
+              <label for="projectOwner">Service owner</label>
               <input id="projectOwner" name="projectOwner" type="text" required />
             </div>
             <div class="field">
@@ -167,6 +182,7 @@
                 <option value="At Risk">At Risk</option>
                 <option value="Delayed">Delayed</option>
                 <option value="Complete">Complete</option>
+                <option value="Archived">Archived</option>
               </select>
             </div>
             <div class="field">
@@ -191,11 +207,11 @@
               <input id="projectStart" name="projectStart" type="date" required />
             </div>
             <div class="field">
-              <label for="projectEnd">End date</label>
+              <label for="projectEnd">Renewal date</label>
               <input id="projectEnd" name="projectEnd" type="date" required />
             </div>
             <div class="field">
-              <label for="projectBudget">Budget</label>
+              <label for="projectBudget">Monthly revenue (USD)</label>
               <input id="projectBudget" name="projectBudget" type="number" min="0" step="1000" required />
             </div>
             <div class="field">
@@ -205,7 +221,7 @@
           </div>
           <div class="form-actions">
             <button id="cancelModal" type="button" class="ghost-button">Cancel</button>
-            <button type="submit" class="primary-button">Save project</button>
+            <button type="submit" class="primary-button">Save service</button>
           </div>
         </form>
       </div>

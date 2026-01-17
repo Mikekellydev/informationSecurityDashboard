@@ -349,6 +349,122 @@ input[type="search"] {
   color: rgba(229, 236, 245, 0.6);
 }
 
+.meta-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(74, 166, 255, 0.35);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  color: rgba(229, 236, 245, 0.75);
+  background: rgba(8, 13, 20, 0.6);
+}
+
+.alerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.alert-card {
+  background: rgba(12, 18, 27, 0.9);
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(74, 166, 255, 0.14);
+}
+
+.alert-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(229, 236, 245, 0.6);
+}
+
+.alert-card h3 {
+  margin: 8px 0 0;
+  font-size: 1.4rem;
+  font-family: var(--font-display);
+}
+
+.alerts-list {
+  display: grid;
+  gap: 12px;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(74, 166, 255, 0.14);
+  background: rgba(9, 14, 20, 0.9);
+}
+
+.alert-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.alert-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.alert-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: rgba(229, 236, 245, 0.6);
+}
+
+.alert-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.alert-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid rgba(229, 236, 245, 0.2);
+  color: rgba(229, 236, 245, 0.8);
+}
+
+.alert-sev-low {
+  background: rgba(47, 154, 118, 0.18);
+  border-color: rgba(47, 154, 118, 0.45);
+}
+
+.alert-sev-medium {
+  background: rgba(209, 139, 33, 0.18);
+  border-color: rgba(209, 139, 33, 0.5);
+}
+
+.alert-sev-high {
+  background: rgba(213, 75, 63, 0.2);
+  border-color: rgba(213, 75, 63, 0.5);
+}
+
+.alert-sev-critical {
+  background: rgba(159, 43, 34, 0.25);
+  border-color: rgba(159, 43, 34, 0.6);
+}
+
+.alerts-empty {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px dashed rgba(74, 166, 255, 0.2);
+  color: rgba(229, 236, 245, 0.6);
+  font-size: 0.85rem;
+}
+
 .table-wrap {
   overflow-x: auto;
   background: rgba(10, 15, 22, 0.8);
